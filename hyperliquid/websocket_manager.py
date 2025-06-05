@@ -97,6 +97,7 @@ class WebsocketManager(threading.Thread):
             self.ping_sender.join()
 
     def on_message(self, _ws, message):
+        import pdb; pdb.set_trace()
         if message == "Websocket connection established.":
             logging.debug(message)
             return
@@ -109,12 +110,16 @@ class WebsocketManager(threading.Thread):
         if identifier is None:
             logging.debug("Websocket not handling empty message")
             return
+        
+        print(f"identifier: {identifier}")
         active_subscriptions = self.active_subscriptions[identifier]
         if len(active_subscriptions) == 0:
             print("Websocket message from an unexpected subscription:", message, identifier)
         else:
             for active_subscription in active_subscriptions:
-                active_subscription.callback(ws_msg)
+                print(f"active_subscription.callback: {active_subscription.callback}")
+                import pdb; pdb.set_trace()
+                # active_subscription.callback(ws_msg)
 
     def on_open(self, _ws):
         logging.debug("on_open")

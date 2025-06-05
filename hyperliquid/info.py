@@ -612,7 +612,8 @@ class Info(API):
         if self.ws_manager is None:
             raise RuntimeError("Cannot call subscribe since skip_ws was used")
         else:
-            return self.ws_manager.subscribe(subscription, callback)
+            # import pdb; pdb.set_trace()
+            return #self.ws_manager.subscribe(subscription, callback)
 
     def unsubscribe(self, subscription: Subscription, subscription_id: int) -> bool:
         self._remap_coin_subscription(subscription)
