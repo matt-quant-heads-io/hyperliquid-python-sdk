@@ -1,15 +1,1 @@
-path_to_saved_model: /home/ubuntu/hyperliquid-python-sdk/models/test_model.pt
-model_def: |
-  class MyModel(torch.nn.Module):
-      def __init__(self, input_dim, hidden_dim, output_dim):
-          super().__init__()
-          self.net = torch.nn.Sequential(
-              torch.nn.Linear(input_dim, hidden_dim),
-              torch.nn.ReLU(),
-              torch.nn.Linear(hidden_dim, output_dim)
-          )
-
-      def forward(self, x):
-          return self.net(x)
-  model = MyModel(input_dim=10, hidden_dim=64, output_dim=1)
-  optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+path_to_saved_model: /home/ubuntu/hyperliquid-python-sdk/examples/trained_model_stacked.pth

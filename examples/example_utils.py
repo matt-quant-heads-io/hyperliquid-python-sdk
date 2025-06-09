@@ -13,6 +13,8 @@ def setup(base_url=None, skip_ws=False, perp_dexs=None):
     with open(config_path) as f:
         config = json.load(f)
     account: LocalAccount = eth_account.Account.from_key(config["secret_key"])
+    # account.address = "0xa5f8946b373fd255661b324ce2582ad0077d79c1"
+    # import pdb; pdb.set_trace()
     address = config["account_address"]
     if address == "":
         address = account.address
@@ -21,8 +23,10 @@ def setup(base_url=None, skip_ws=False, perp_dexs=None):
         print("Running with agent address:", account.address)
     info = Info(base_url, skip_ws, perp_dexs=perp_dexs)
     user_state = info.user_state(address)
+    print(f"user_state: {user_state}")
     spot_user_state = info.spot_user_state(address)
     margin_summary = user_state["marginSummary"]
+    print(f"margin_summary: {margin_summary}")
     if float(margin_summary["accountValue"]) == 0 and len(spot_user_state["balances"]) == 0:
         print("Not running the example because the provided account has no equity.")
         url = info.base_url.split(".", 1)[1]
